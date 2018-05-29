@@ -1,14 +1,9 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class BookCategory {
-    //  - REF = reference books,such as dictionaries, etc.
-    // - MTB = manuals, textbooks, handbooks, etc.
-    // - SM= scientific monographs
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,15 +14,10 @@ public class BookCategory {
     @Column(nullable = true)
     private String description;
 
+    private Integer borrowingCapacity;
+
     @Version
     private Integer version;
-
-    @OneToMany(
-            mappedBy = "bookCategory",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Book> books = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -53,19 +43,19 @@ public class BookCategory {
         this.description = description;
     }
 
+    public Integer getBorrowingCapacity() {
+        return borrowingCapacity;
+    }
+
+    public void setBorrowingCapacity(Integer borrowingCapacity) {
+        this.borrowingCapacity = borrowingCapacity;
+    }
+
     public Integer getVersion() {
         return version;
     }
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
     }
 }

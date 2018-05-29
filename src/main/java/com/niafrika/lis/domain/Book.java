@@ -22,8 +22,8 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_category_id")
     private BookCategory bookCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
