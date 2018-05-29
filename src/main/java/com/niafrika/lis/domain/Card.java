@@ -21,6 +21,17 @@ public class Card {
     @ManyToMany(mappedBy = "cards")
     private List<BookCategory> bookCategories = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "membership_card",
+            joinColumns = @JoinColumn(name = "membership_id"),
+            inverseJoinColumns = @JoinColumn(name = "card_id")
+    )
+    private List<Membership> memberships = new ArrayList<>();
+
+
     @Version
     private Integer version;
 
@@ -62,6 +73,14 @@ public class Card {
 
     public void setBookCategories(List<BookCategory> bookCategories) {
         this.bookCategories = bookCategories;
+    }
+
+    public List<Membership> getMemberships() {
+        return memberships;
+    }
+
+    public void setMemberships(List<Membership> memberships) {
+        this.memberships = memberships;
     }
 
     public Integer getVersion() {

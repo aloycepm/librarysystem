@@ -2,6 +2,8 @@ package com.niafrika.lis.domain;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Membership {
     @Id
@@ -19,6 +21,9 @@ public class Membership {
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
+
+    @ManyToMany(mappedBy = "memberships")
+    private List<Card> cards = new ArrayList<>();
 
     public Long getId() {
         return id;
