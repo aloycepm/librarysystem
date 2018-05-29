@@ -1,4 +1,4 @@
-package com.inaya.lis.domain;
+package com.niafrika.lis.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_category_id")
+    @MapsId
     private BookCategory bookCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,4 +1,4 @@
-package com.inaya.lis;
+package com.niafrika.lis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

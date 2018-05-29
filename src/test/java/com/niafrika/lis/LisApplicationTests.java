@@ -1,4 +1,4 @@
-package com.inaya.lis;
+package com.niafrika.lis;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

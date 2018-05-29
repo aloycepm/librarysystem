@@ -1,4 +1,4 @@
-package com.inaya.lis.domain;
+package com.niafrika.lis.domain;
 
 import javax.persistence.*;
 
