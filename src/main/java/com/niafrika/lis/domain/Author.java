@@ -1,6 +1,7 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     private String name;
-
-    @Column(nullable = true)
     private String description;
 
     @Version

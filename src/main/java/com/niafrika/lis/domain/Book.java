@@ -1,6 +1,7 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    @NotNull
+    @Column(name = "isbn", unique = true)
     private String isbn;
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String year;
 
     @Version
@@ -29,6 +34,13 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @OneToMany(
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Borrowing> borrowings = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -92,5 +104,13 @@ public class Book {
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
+    }
+
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }

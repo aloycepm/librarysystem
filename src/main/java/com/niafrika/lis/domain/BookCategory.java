@@ -1,6 +1,7 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,11 @@ public class BookCategory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
     @Column(unique = true)
     private String name;
 
-    @Column(nullable = true)
+    @Column(name = "description", nullable = true)
     private String description;
 
     @Version

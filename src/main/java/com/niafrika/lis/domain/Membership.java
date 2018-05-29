@@ -1,21 +1,28 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Membership {
     @Id
     private Long id;
 
+    @NotNull
     private String firstName;
 
-    @Column(nullable = true)
     private String middleName;
 
+    @NotNull
     private String lastName;
+
+    @NotNull
     private String sex;
+
+    @NotNull
     private LocalDate expiredate;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -24,6 +31,13 @@ public class Membership {
 
     @ManyToMany(mappedBy = "memberships")
     private List<Card> cards = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "membership",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Borrowing> borrowings = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -79,5 +93,21 @@ public class Membership {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }

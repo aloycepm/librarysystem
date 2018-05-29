@@ -1,6 +1,7 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +11,14 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    @NotNull
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(nullable = true)
     private String description;
 
+    @NotNull
     private Integer borrowingCapacity;
 
     @ManyToMany(mappedBy = "cards")
@@ -26,8 +29,8 @@ public class Card {
             CascadeType.MERGE
     })
     @JoinTable(name = "membership_card",
-            joinColumns = @JoinColumn(name = "membership_id"),
-            inverseJoinColumns = @JoinColumn(name = "card_id")
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "membership_id")
     )
     private List<Membership> memberships = new ArrayList<>();
 
