@@ -29,6 +29,16 @@ public class BookCategory {
     )
     private List<Book> books = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "card_book_category",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_category_id")
+    )
+    private List<Card> cards = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -67,5 +77,13 @@ public class BookCategory {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }

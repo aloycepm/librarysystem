@@ -1,6 +1,8 @@
 package com.niafrika.lis.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Card {
@@ -15,6 +17,9 @@ public class Card {
     private String description;
 
     private Integer borrowingCapacity;
+
+    @ManyToMany(mappedBy = "cards")
+    private List<BookCategory> bookCategories = new ArrayList<>();
 
     @Version
     private Integer version;
@@ -49,6 +54,14 @@ public class Card {
 
     public void setBorrowingCapacity(Integer borrowingCapacity) {
         this.borrowingCapacity = borrowingCapacity;
+    }
+
+    public List<BookCategory> getBookCategories() {
+        return bookCategories;
+    }
+
+    public void setBookCategories(List<BookCategory> bookCategories) {
+        this.bookCategories = bookCategories;
     }
 
     public Integer getVersion() {
